@@ -6,6 +6,9 @@
 # imports
 import requests
 from getpass import getpass
+from random import seed
+from jobs import get_users
+from random import randint
 
 
 def print_hi(name):
@@ -17,11 +20,13 @@ baseUrl = 'http://localhost:1998'
 ref_token = ''
 acc_token = ''
 
-# TODO get credentials from user
 credentials = {
         'name': 'dev',
         'password': 'test'
 }
+
+
+def
 
 # login sending credentials
 def login():
@@ -46,29 +51,30 @@ def test():
         'accessToken': acc_token,
         'Content-Type': 'application/json'
     }
-    print('auth:\t', auth)
     response = requests.get(baseUrl + '/api/v1/users', headers=auth)
     print('test status code: ', response.status_code)
     users = response.json()
+    get_users(baseUrl + '/api/v1/users')
     for user in users:
         print(user)
 
-def test_2():
-    auth = {
-        'accessToken': acc_token,
-        'Content-Type': 'application/json'
-    }
-    print('auth:\t', auth)
-    response = requests.get(baseUrl + '/api/v1/roles', headers=auth)
-    print('test status code: ', response.status_code)
-    roles = response.json()
-    for role in roles:
-        print(role['role'])
+
+def worker():
+    # auth = {
+    #     'accessToken': acc_token,
+    #     'Content-Type': 'application/json'
+    # }
+    seed(1)
+    # response = requests.get(baseUrl + '/api/v1/roles', headers=auth)
+    # print('test 2 status code: ', response.status_code)
+    # roles = response.json()
+    # for role in roles:
+    #    print(role['role'])
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test()
-    test_2()
+    # test()
+    worker()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
